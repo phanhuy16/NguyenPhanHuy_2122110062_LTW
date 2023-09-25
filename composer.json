@@ -1,0 +1,10 @@
+{
+  "name": "nguyenphanhuy/shop-giay",
+  "description": "Xây dựng website bán hàng - Thầy Lợi dạy",
+  "autoload": {
+    "psr-4": {
+      "Src\\": "application/"
+    }
+  },
+  "require": {}
+}
