@@ -1,10 +1,23 @@
 {
   "name": "nguyenphanhuy/shop-giay",
   "description": "Xây dựng website bán hàng - Thầy Lợi dạy",
+  "authors": [
+    {
+      "name": "Nguyễn Phan Huy",
+      "email": "hn790078@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
-      "Src\\": "application/"
-    }
+      "App\\": "app/"
+    },
+    "files": [
+      "./app/Route.php",
+      "./config/database.php"
+    ]
   },
-  "require": {}
+  "require": {
+    "illuminate/database": "^10.28",
+    "illuminate/events": "^10.28"
+  }
 }
