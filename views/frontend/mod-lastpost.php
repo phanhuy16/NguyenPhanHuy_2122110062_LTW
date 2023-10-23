@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-6">
             <a href="post_detail.html">
-              <img class="img-fluid" src="public/images/post/post-4.webp" />
+              <img class="img-fluid" src="public/images/post/post-4.jpg" />
             </a>
             <h3 class="post-title fs-4 py-2">
               <a href="post_detail.html">
