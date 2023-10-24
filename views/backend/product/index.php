@@ -9,14 +9,14 @@ $list = Product::where('status', '!=', 0)
 
 <?php require_once "../views/backend/header.php"; ?>
 <!-- CONTENT -->
-<form action="" method="post">
+<form action="index.php?option=product&cat=process" method="post" enctype="multipart/form-data">
    <div class="content-wrapper">
       <section class="content-header">
          <div class="container-fluid">
             <div class="row mb-2">
                <div class="col-sm-12">
                   <h1 class="d-inline">Tất cả sản phẩm</h1>
-                  <a href="product_create.html" class="btn btn-sm btn-primary">Thêm sản phẩm</a>
+                  <a href="index.php?option=product&cat=create" class="btn btn-sm btn-primary">Thêm sản phẩm</a>
                </div>
             </div>
          </div>
@@ -59,13 +59,23 @@ $list = Product::where('status', '!=', 0)
                                  </div>
                                  <div class="function_style">
                                     <?php if ($item->status == 1) : ?>
-                                       <a class="text-success" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Hiện</a> |
+                                       <a class="btn btn-primary btn-xs" href="index.php?option=product&cat=status&id=<?= $item->id; ?>">
+                                          <i class="fas fa-toggle-on"></i> Hiện
+                                       </a> |
                                     <?php else : ?>
-                                       <a class="text-danger" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Ẩn</a> |
+                                       <a class="btn btn-warning btn-xs" href="index.php?option=product&cat=status&id=<?= $item->id; ?>">
+                                          <i class="fas fa-toggle-off"></i> Ẩn
+                                       </a> |
                                     <?php endif; ?>
-                                    <a href="index.php?option=category&cat=edit&id=<?= $item->id; ?>">Chỉnh sửa</a> |
-                                    <a href="index.php?option=category&cat=show&id=<?= $item->id; ?>">Chi tiết</a> |
-                                    <a href="index.php?option=category&cat=delete&id=<?= $item->id; ?>">Xoá</a>
+                                    <a class="btn btn-secondary btn-xs" href="index.php?option=product&cat=edit&id=<?= $item->id; ?>">
+                                       <i class="fas fa-edit"></i> Chỉnh sửa
+                                    </a> |
+                                    <a class="btn btn-info btn-xs" href="index.php?option=product&cat=show&id=<?= $item->id; ?>">
+                                       <i class="fas fa-eye"></i> Chi tiết
+                                    </a> |
+                                    <a class="btn btn-danger btn-xs" href="index.php?option=product&cat=delete&id=<?= $item->id; ?>">
+                                       <i class="fas fa-trash"></i> Xoá
+                                    </a>
                                  </div>
                               </td>
                               <td><?= $item->slug; ?></td>

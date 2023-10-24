@@ -3,9 +3,12 @@
 use App\Models\Category;
 
 $list = Category::where('status', '!=', 0)
-   ->select('status', 'id', 'image', 'name', 'slug')
    ->orderBy('created_at', 'DESC')
    ->get();
+
+foreach ($list as $key => $value) {
+   $list[$key]->child = Category::where('parent_id', $value->id)->get();
+}
 ?>
 
 <?php require_once "../views/backend/header.php"; ?>
@@ -24,11 +27,19 @@ $list = Category::where('status', '!=', 0)
       <!-- Main content -->
       <section class="content">
          <div class="card">
-            <div class="card-header text-right">
-               <button class="btn btn-sm btn-success" type="submit" name="THEM">
-                  <i class="fa fa-save" aria-hidden="true"></i>
-                  Lưu
-               </button>
+            <div class="card-header">
+               <div class="row">
+                  <div class="col-md-6">
+                     <a href="index.php?option=category" class="btn btn-sm btn-primary">Tất cả </a> |
+                     <a href="index.php?option=category&cat=trash" class="btn btn-sm btn-warning"> Thùng rác</a>
+                  </div>
+                  <div class="col-md-6 text-right">
+                     <button class="btn btn-sm btn-success" type="submit" name="THEM">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        Lưu
+                     </button>
+                  </div>
+               </div>
             </div>
             <div class="card-body">
                <div class="row">
@@ -44,9 +55,13 @@ $list = Category::where('status', '!=', 0)
                      <div class="mb-3">
                         <label>Danh mục cha (*)</label>
                         <select name="parent_id" class="form-control">
-                           <option value="">None</option>
+                           <option value="0">None</option>
                            <option value="1">Tên danh mục</option>
                         </select>
+                     </div>
+                     <div class="mb-3">
+                        <label>Mô tả</label>
+                        <textarea name="description" class="form-control"></textarea>
                      </div>
                      <div class="mb-3">
                         <label>Hình đại diện</label>
@@ -80,7 +95,7 @@ $list = Category::where('status', '!=', 0)
                                        <input type="checkbox">
                                     </td>
                                     <td>
-                                       <img src="../public/images/category/<?= $item->image; ?>" alt="<?= $item->image; ?>">
+                                       <img class="img-fluid" src="../public/images/category/<?= $item->image; ?>" alt="<?= $item->image; ?>">
                                     </td>
                                     <td>
                                        <div class="name">
@@ -88,13 +103,23 @@ $list = Category::where('status', '!=', 0)
                                        </div>
                                        <div class="function_style">
                                           <?php if ($item->status == 1) : ?>
-                                             <a class="text-success" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Hiện</a> |
+                                             <a class="btn btn-primary btn-xs" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">
+                                                <i class="fas fa-toggle-on"></i> Hiện
+                                             </a> |
                                           <?php else : ?>
-                                             <a class="text-danger" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Ẩn</a> |
+                                             <a class="btn btn-warning btn-xs" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">
+                                                <i class="fas fa-toggle-off"></i> Ẩn
+                                             </a> |
                                           <?php endif; ?>
-                                          <a href="index.php?option=category&cat=edit&id=<?= $item->id; ?>">Chỉnh sửa</a> |
-                                          <a href="index.php?option=category&cat=show&id=<?= $item->id; ?>">Chi tiết</a> |
-                                          <a href="index.php?option=category&cat=delete&id=<?= $item->id; ?>">Xoá</a>
+                                          <a class="btn btn-secondary btn-xs" href="index.php?option=category&cat=edit&id=<?= $item->id; ?>">
+                                             <i class="fas fa-edit"></i> Chỉnh sửa
+                                          </a> |
+                                          <a class="btn btn-info btn-xs" href="index.php?option=category&cat=show&id=<?= $item->id; ?>">
+                                             <i class="fas fa-eye"></i> Chi tiết
+                                          </a> |
+                                          <a class="btn btn-danger btn-xs" href="index.php?option=category&cat=delete&id=<?= $item->id; ?>">
+                                             <i class="fas fa-trash"></i> Xoá
+                                          </a>
                                        </div>
                                     </td>
                                     <td><?= $item->slug; ?></td>
