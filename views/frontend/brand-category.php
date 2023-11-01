@@ -1,7 +1,7 @@
 <?php
 
 use App\Libraries\Pagination;
-use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Product;
 
 $limit = 8;
@@ -9,37 +9,16 @@ $current = Pagination::pageCurrent();
 $offset = Pagination::pageOffset($current, $limit);
 
 $slug = $_REQUEST['cat'];
-$cat = Category::where([['status', '=', 1], ['slug', '=', $slug]])
+$brand = Brand::where([['status', '=', 1], ['slug', '=', $slug]])
    ->select('id', 'name')->first();
 
-$list_id = array();
-array_push($list_id, $cat->id);
-
-$list_category1 = Category::where([['parent_id', '=', $cat->id], ['status', '=', 1]])
-   ->orderBy('sort_order', 'ASC')
-   ->select('id')->get();
-if (count($list_category1) > 0) {
-   foreach ($list_category1 as $cat1) {
-      array_push($list_id, $cat1->id);
-      $list_category2 = Category::where([['parent_id', '=', $cat1->id], ['status', '=', 1]])
-         ->orderBy('sort_order', 'ASC')
-         ->select('name', 'slug', 'id', 'image')->get();
-      if (count($list_category2) > 0) {
-         foreach ($list_category2 as $cat2) {
-            array_push($list_id, $cat2->id);
-         }
-      }
-   }
-}
-
-$list_product = Product::where('status', '=', 1)
-   ->whereIn('category_id', $list_id)
+$list_product = Product::where([['status', '=', 1], ['brand_id', '=', $brand->id]])
    ->orderBy('created_at', 'DESC')
    ->skip($offset)
    ->limit($limit)
    ->get();
 
-$total = Product::where('status', '=', 1)->whereIn('category_id', $list_id)->count();
+$total = Product::where([['status', '=', 1], ['brand_id', '=', $brand->id]])->count();
 ?>
 
 <?php require_once "views/frontend/header.php"; ?>
@@ -48,10 +27,10 @@ $total = Product::where('status', '=', 1)->whereIn('category_id', $list_id)->cou
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
          <ol class="breadcrumb py-2 my-0">
             <li class="breadcrumb-item">
-               <a class="text-main" href="index.html">Trang chủ</a>
+               <a class="text-main" href="index.php">Trang chủ</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-               <?= $cat->name; ?>
+               <?= $brand->name; ?>
             </li>
          </ol>
       </nav>
@@ -67,7 +46,7 @@ $total = Product::where('status', '=', 1)->whereIn('category_id', $list_id)->cou
          </div>
          <div class="col-md-9 order-1 order-md-2">
             <div class="category-title bg-main">
-               <h3 class="fs-5 py-3 text-center"><?= $cat->name; ?></h3>
+               <h3 class="fs-5 py-3 text-center"><?= $brand->name; ?></h3>
             </div>
             <div class="product-category mt-3">
                <div class="row product-list">
@@ -78,7 +57,7 @@ $total = Product::where('status', '=', 1)->whereIn('category_id', $list_id)->cou
                   <?php endforeach; ?>
                </div>
             </div>
-            <?= Pagination::pageLink($total, $current, $limit, 'index.php?option=product&cat=' . $slug); ?>
+            <?= Pagination::pageLink($total, $current, $limit, 'index.php?option=brand&cat=' . $slug); ?>
          </div>
       </div>
    </div>

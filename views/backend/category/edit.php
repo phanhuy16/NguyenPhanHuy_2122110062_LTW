@@ -42,7 +42,7 @@ if ($category == null) {
             <div class="col-md-12">
               <div class="mb-3">
                 <input type="hidden" name="id" value="<?= $category->id; ?>">
-                <label>Tên thương danh mục (*)</label>
+                <label>Tên danh mục (*)</label>
                 <input type="text" value="<?= $category->name; ?>" name="name" class="form-control">
               </div>
               <div class="mb-3">

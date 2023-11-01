@@ -5,10 +5,6 @@ use App\Models\Category;
 $list = Category::where('status', '!=', 0)
    ->orderBy('created_at', 'DESC')
    ->get();
-
-foreach ($list as $key => $value) {
-   $list[$key]->child = Category::where('parent_id', $value->id)->get();
-}
 ?>
 
 <?php require_once "../views/backend/header.php"; ?>
@@ -42,6 +38,7 @@ foreach ($list as $key => $value) {
                </div>
             </div>
             <div class="card-body">
+               <?php require_once "../views/backend/message.php"; ?>
                <div class="row">
                   <div class="col-md-4">
                      <div class="mb-3">
