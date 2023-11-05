@@ -18,7 +18,7 @@ if ($brand == null) {
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-12">
-               <h1 class="d-inline">Chi tiết</h1>
+               <h1 class="d-inline">Chi tiết thương hiệu</h1>
             </div>
          </div>
       </div>

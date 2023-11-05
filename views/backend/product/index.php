@@ -2,8 +2,11 @@
 
 use App\Models\Product;
 
-$list = Product::where('status', '!=', 0)
-   ->orderBy('created_at', 'DESC')
+$list = Product::where('product.status', '!=', 0)
+   ->join('category', 'category.id', '=', 'product.category_id')
+   ->join('brand', 'brand.id', '=', 'product.brand_id')
+   ->select("product.*", "category.name as category_name", "brand.name as brand_name")
+   ->orderBy('product.created_at', 'DESC')
    ->get();
 ?>
 
@@ -14,23 +17,25 @@ $list = Product::where('status', '!=', 0)
       <section class="content-header">
          <div class="container-fluid">
             <div class="row mb-2">
-               <div class="col-sm-12">
+               <div class="col-sm-12 d-flex align-items-center">
                   <h1 class="d-inline">Tất cả sản phẩm</h1>
-                  <a href="index.php?option=product&cat=create" class="btn btn-sm btn-primary">Thêm sản phẩm</a>
+                  <a href="index.php?option=product&cat=create" class="btn btn-sm btn-primary mx-3">Thêm sản phẩm</a>
                </div>
             </div>
          </div>
       </section>
       <!-- Main content -->
       <section class="content">
+         <a href="index.php?option=product&cat=trash" class="mb-3 btn btn-sm btn-warning"> Thùng rác</a>
          <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center">
                <select name="" id="" class="form-control d-inline" style="width:100px;">
                   <option value="">Xoá</option>
                </select>
-               <button class="btn btn-sm btn-success">Áp dụng</button>
+               <button class="mx-3 btn btn-sm btn-success" type="submit" name="APPLY">Áp dụng</button>
             </div>
             <div class="card-body">
+               <?php require_once "../views/backend/message.php"; ?>
                <table class="table table-bordered" id="mytable">
                   <thead>
                      <tr>
@@ -51,7 +56,7 @@ $list = Product::where('status', '!=', 0)
                                  <input type="checkbox">
                               </td>
                               <td>
-                                 <img src="../public/images/product/<?= $item->image; ?>" alt="<?= $item->image; ?>">
+                                 <img class="img-fluid" src="../public/images/product/<?= $item->image; ?>" alt="<?= $item->image; ?>">
                               </td>
                               <td>
                                  <div class="name">
@@ -78,8 +83,8 @@ $list = Product::where('status', '!=', 0)
                                     </a>
                                  </div>
                               </td>
-                              <td><?= $item->slug; ?></td>
-                              <td><?= $item->slug; ?></td>
+                              <td><?= $item->category_name; ?></td>
+                              <td><?= $item->brand_name; ?></td>
                            </tr>
                         <?php endforeach; ?>
                      <?php endif; ?>

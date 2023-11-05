@@ -2,9 +2,14 @@
 
 use App\Models\Category;
 
-$list = Category::where('status', '!=', 0)
+$list = Category::where([['status', '!=', 0], ['parent_id', '==', '0']])
    ->orderBy('created_at', 'DESC')
    ->get();
+
+$parent_id_html = '';
+foreach ($list as $parent_id) {
+   $parent_id_html .= "<option value='$parent_id->parent_id'>$parent_id->name</option>";
+}
 ?>
 
 <?php require_once "../views/backend/header.php"; ?>
@@ -53,7 +58,7 @@ $list = Category::where('status', '!=', 0)
                         <label>Danh mục cha (*)</label>
                         <select name="parent_id" class="form-control">
                            <option value="0">None</option>
-                           <option value="1">Tên danh mục</option>
+                           <?= $parent_id_html; ?>
                         </select>
                      </div>
                      <div class="mb-3">

@@ -38,15 +38,23 @@
                   0987654321
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Đăng nhập</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="register.html">Đăng ký</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="profile.html">Hồ Diên Lợi</a>
-              </li>
+              <?php if (isset($_SESSION['name'])) : ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">
+                    User: <?php echo $_SESSION['name']; ?>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?option=customer&logout=true">Đăng xuất</a>
+                </li>
+              <?php else : ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?option=customer&login=true">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?option=customer&register=true">Đăng ký</a>
+                </li>
+              <?php endif; ?>
             </ul>
           </div>
           <div class="fs-6 py-2">

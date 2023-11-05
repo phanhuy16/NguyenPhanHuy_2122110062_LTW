@@ -9,6 +9,7 @@ if ($category == null) {
   MyClass::set_flash('message', ['msg' => 'Lỗi trang 404', 'type' => 'danger']);
   header("location:index.php?option=category");
 }
+
 ?>
 
 <?php require_once "../views/backend/header.php"; ?>
@@ -56,8 +57,11 @@ if ($category == null) {
               <div class="mb-3">
                 <label>Danh mục cha (*)</label>
                 <select name="parent_id" class="form-control">
-                  <option value="0">None</option>
-                  <option value="1">Tên danh mục</option>
+                  <?php for ($i = 0; $i <= 2; $i++) : ?>
+                    <option value="<?= $i; ?>" <?= ($category->parent_id == $i) ? 'selected' : ''; ?>>
+                      <?= $i; ?>
+                    </option>
+                  <?php endfor; ?>
                 </select>
               </div>
               <div class="mb-3">
