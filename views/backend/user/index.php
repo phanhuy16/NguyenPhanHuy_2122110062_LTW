@@ -24,12 +24,14 @@ $list = User::where('status', '!=', 0)
    </section>
    <!-- Main content -->
    <section class="content">
+      <a href="index.php?option=user" class="btn btn-sm btn-primary mb-3">Tất cả </a> |
       <a href="index.php?option=user&cat=trash" class="mb-3 btn btn-sm btn-warning"> Thùng rác</a>
       <div class="card">
          <div class="card-header">
             Noi dung
          </div>
          <div class="card-body">
+            <?php require_once "../views/backend/message.php"; ?>
             <table class="table table-bordered" id="mytable">
                <thead>
                   <tr>

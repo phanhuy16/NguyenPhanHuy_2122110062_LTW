@@ -13,9 +13,9 @@ $list = Order::where('status', '!=', 0)
    <section class="content-header">
       <div class="container-fluid">
          <div class="row mb-2">
-            <div class="col-sm-12">
-               <h1 class="d-inline">Tất cả thương hiệu</h1>
-               <a href="brand_create.html" class="btn btn-sm btn-primary">Thêm thương hiêu</a>
+            <div class="col-sm-12 d-flex align-items-center">
+               <h1 class="d-inline">Tất cả đơn hàng</h1>
+               <!-- <a href="index.php?option=brand" class="mx-3 btn btn-sm btn-primary">Thêm thương hiêu</a> -->
             </div>
          </div>
       </div>
@@ -34,8 +34,9 @@ $list = Order::where('status', '!=', 0)
                         <input type="checkbox">
                      </th>
                      <th class="text-center" style="width:130px;">Hình ảnh</th>
-                     <th>Tên thương hiệu</th>
-                     <th>Tên slug</th>
+                     <th>Tên người nhận</th>
+                     <th>Số điện thoại</th>
+                     <th>Địa chỉ</th>
                   </tr>
                </thead>
                <tbody>
@@ -54,16 +55,27 @@ $list = Order::where('status', '!=', 0)
                               </div>
                               <div class="function_style">
                                  <?php if ($item->status == 1) : ?>
-                                    <a class="text-success" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Hiện</a> |
+                                    <a class="btn btn-primary btn-xs" href="index.php?option=order&cat=status&id=<?= $item->id; ?>">
+                                       <i class="fas fa-toggle-on"></i> Hiện
+                                    </a> |
                                  <?php else : ?>
-                                    <a class="text-danger" href="index.php?option=category&cat=status&id=<?= $item->id; ?>">Ẩn</a> |
+                                    <a class="btn btn-warning btn-xs" href="index.php?option=order&cat=status&id=<?= $item->id; ?>">
+                                       <i class="fas fa-toggle-off"></i> Ẩn
+                                    </a> |
                                  <?php endif; ?>
-                                 <a href="index.php?option=category&cat=edit&id=<?= $item->id; ?>">Chỉnh sửa</a> |
-                                 <a href="index.php?option=category&cat=show&id=<?= $item->id; ?>">Chi tiết</a> |
-                                 <a href="index.php?option=category&cat=delete&id=<?= $item->id; ?>">Xoá</a>
+                                 <!-- <a class="btn btn-secondary btn-xs" href="index.php?option=order&cat=edit&id=<?= $item->id; ?>">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                 </a> | -->
+                                 <a class="btn btn-info btn-xs" href="index.php?option=order&cat=show&id=<?= $item->id; ?>">
+                                    <i class="fas fa-eye"></i> Chi tiết
+                                 </a> |
+                                 <a class="btn btn-danger btn-xs" href="index.php?option=order&cat=delete&id=<?= $item->id; ?>">
+                                    <i class="fas fa-trash"></i> Xoá
+                                 </a>
                               </div>
                            </td>
-                           <td><?= $item->slug; ?></td>
+                           <td><?= $item->deliveryphone; ?></td>
+                           <td><?= $item->deliveryaddress; ?></td>
                         </tr>
                      <?php endforeach; ?>
                   <?php endif; ?>

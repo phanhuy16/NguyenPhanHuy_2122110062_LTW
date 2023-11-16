@@ -9,6 +9,13 @@ if ($category == null) {
   MyClass::set_flash('message', ['msg' => 'Lỗi trang 404', 'type' => 'danger']);
   header("location:index.php?option=category");
 }
+$list = Category::where('status', '!=', 0)
+  ->orderBy('created_at', 'DESC')
+  ->get();
+$parent_id_html = '';
+foreach ($list as $parent_id) {
+  $parent_id_html .= "<option value='$parent_id->parent_id'>$parent_id->name</option>";
+}
 
 ?>
 
@@ -29,14 +36,14 @@ if ($category == null) {
     <section class="content">
       <div class="card">
         <div class="card-header text-right">
-          <button class="btn btn-sm btn-success" type="submit" name="CAPNHAT">
-            <i class="fa fa-save" aria-hidden="true"></i>
-            Lưu
-          </button>
           <a href="index.php?option=category" class="btn btn-sm btn-info">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             Về danh sách
           </a>
+          <button class="btn btn-sm btn-success" type="submit" name="CAPNHAT">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Lưu
+          </button>
         </div>
         <div class="card-body">
           <div class="row">
@@ -57,11 +64,8 @@ if ($category == null) {
               <div class="mb-3">
                 <label>Danh mục cha (*)</label>
                 <select name="parent_id" class="form-control">
-                  <?php for ($i = 0; $i <= 2; $i++) : ?>
-                    <option value="<?= $i; ?>" <?= ($category->parent_id == $i) ? 'selected' : ''; ?>>
-                      <?= $i; ?>
-                    </option>
-                  <?php endfor; ?>
+                  <option value="0">None</option>
+                  <?= $parent_id_html; ?>
                 </select>
               </div>
               <div class="mb-3">

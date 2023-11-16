@@ -71,7 +71,7 @@ if ($user == null) {
                         <label>Giới tính (*)</label>
                         <select name="gender" class="form-control">
                            <option value="1" <?= ($user->gender == 1) ? 'selected' : ''; ?>>Nam</option>
-                           <option value="2" <?= ($user->gender == 2) ? 'selected' : ''; ?>>Nữ</option>
+                           <option value="0" <?= ($user->gender == 0) ? 'selected' : ''; ?>>Nữ</option>
                         </select>
                      </div>
                      <div class="mb-3">

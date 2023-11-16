@@ -64,7 +64,7 @@ $list = User::where('status', '!=', 0)->orderBy('created_at', 'DESC')->get();
                         <label>Giới tính (*)</label>
                         <select name="gender" class="form-control">
                            <option value="1">Nam</option>
-                           <option value="2">Nữ</option>
+                           <option value="0">Nữ</option>
                         </select>
                      </div>
                      <div class="mb-3">

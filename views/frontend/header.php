@@ -17,7 +17,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6 col-sm-6 col-md-2 py-1">
-          <a href="index.html">
+          <a href="index.php">
             <img src="public/images/logo.png" class="img-fluid" alt="Logo">
           </a>
         </div>
@@ -40,7 +40,7 @@
               </li>
               <?php if (isset($_SESSION['name'])) : ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="profile.html">
+                  <a class="nav-link" href="index.php?option=customer&profile=true">
                     User: <?php echo $_SESSION['name']; ?>
                   </a>
                 </li>

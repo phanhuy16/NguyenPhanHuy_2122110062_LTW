@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Product;
+use App\Libraries\MyClass;
 use App\Models\Category;
 use App\Models\Brand;
-use App\Libraries\MyClass;
 
 $id = $_REQUEST['id'];
 $product = Product::find($id);
@@ -11,19 +11,19 @@ if ($product == null) {
    MyClass::set_flash('message', ['msg' => 'Lỗi trang 404', 'type' => 'danger']);
    header("location:index.php?option=product");
 }
-
-$list_category = Category::where([['parent_id', '!=', '0'], ['status', '!=', 0]])->orderBy('created_at', 'DESC')->get();
+$list_category = Category::where('parent_id', '!=', '0')->orderBy('created_at', 'DESC')
+   ->select('id', 'name')->get();
 $category_id_html = '';
 foreach ($list_category as $category) {
    $category_id_html .= "<option value='$category->id'>$category->name</option>";
 }
+
 $list_brand = Brand::where('status', '!=', 0)->orderBy('created_at', 'DESC')->get();
 $brand_id_html = '';
 foreach ($list_brand as $brand) {
    $brand_id_html .= "<option value='$brand->id'>$brand->name</option>";
 }
 ?>
-
 <?php require_once "../views/backend/header.php"; ?>
 <!-- CONTENT -->
 <form action="index.php?option=product&cat=process" method="post" enctype="multipart/form-data">
@@ -47,12 +47,12 @@ foreach ($list_brand as $brand) {
                </a>
                <button class="btn btn-sm btn-success" type="submit" name="CAPNHAT">
                   <i class="fa fa-save" aria-hidden="true"></i>
-                  Lưu
+                  Cập nhật
                </button>
             </div>
             <div class="card-body">
                <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-9">
                      <div class="mb-3">
                         <input type="hidden" name="id" value="<?= $product->id; ?>">
                         <label>Tên sản phẩm (*)</label>
@@ -62,26 +62,40 @@ foreach ($list_brand as $brand) {
                         <label>Slug</label>
                         <input type="text" value="<?= $product->slug; ?>" name="slug" class="form-control">
                      </div>
-                     <div class="mb-3">
-                        <label>Danh mục (*)</label>
-                        <select name="category_id" class="form-control">
-                           <option value="" <?= $category_id_html; ?>>Tên danh mục</option>
-                        </select>
-                     </div>
-                     <div class="mb-3">
-                        <label>Thương hiệu (*)</label>
-                        <select name="brand_id" class="form-control">
-                           <option value="" <?= $brand_id_html; ?>>Tên thương hiệu</option>
-                        </select>
-                     </div>
-                     <div class="mb-3">
-                        <label>Mô tả</label>
-                        <textarea name="description" class="form-control"><?= $product->description; ?></textarea>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="mb-3">
+                              <label>Danh mục (*)</label>
+                              <select name="category_id" class="form-control">
+                                 <option value="">Chọn danh mục</option>
+                                 <?= $category_id_html; ?>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="mb-3">
+                              <label>Thương hiệu (*)</label>
+                              <select name="brand_id" class="form-control">
+                                 <option value="">Chọn thương hiệu</option>
+                                 <?= $brand_id_html; ?>
+                              </select>
+                           </div>
+                        </div>
                      </div>
                      <div class="mb-3">
                         <label>Chi tiết (*)</label>
-                        <textarea name="detail" value="<?= $product->detail; ?>" placeholder="Nhập chi tiết sản phẩm" rows="5" class="form-control"></textarea>
+                        <textarea name="detail" placeholder="Nhập chi tiết sản phẩm" rows="2" class="form-control">
+                           <?= $product->detail; ?>
+                        </textarea>
                      </div>
+                     <div class="mb-3">
+                        <label>Mô tả (*)</label>
+                        <textarea name="description" placeholder="Nhập chi tiết sản phẩm" rows="2" class="form-control">
+                           <?= $product->description; ?>
+                        </textarea>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
                      <div class="mb-3">
                         <label>Giá bán (*)</label>
                         <input type="number" value="<?= $product->price; ?>" min="10000" name="price" class="form-control">

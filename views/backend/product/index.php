@@ -26,7 +26,8 @@ $list = Product::where('product.status', '!=', 0)
       </section>
       <!-- Main content -->
       <section class="content">
-         <a href="index.php?option=product&cat=trash" class="mb-3 btn btn-sm btn-warning"> Thùng rác</a>
+         <a href="index.php?option=product" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
+         <a href="index.php?option=product&cat=trash" class="mb-2 btn btn-sm btn-warning"> Thùng rác</a>
          <div class="card">
             <div class="card-header d-flex align-items-center">
                <select name="" id="" class="form-control d-inline" style="width:100px;">

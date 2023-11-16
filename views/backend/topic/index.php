@@ -30,6 +30,7 @@ $list = Topic::where('status', '!=', 0)->orderBy('created_at', 'DESC')->get();
             <div class="row">
                <div class="col-md-6">
                   <div class="card-header">
+                     <a href="index.php?option=topic" class="btn btn-sm btn-primary">Tất cả </a> |
                      <a href="index.php?option=topic&cat=trash" class="btn btn-sm btn-warning"> Thùng rác</a>
                   </div>
                </div>

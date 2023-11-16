@@ -67,6 +67,7 @@ if (isset($_POST['CAPNHAT'])) {
   $user->status = $_POST['status'];
   $user->username = $_POST['username'];
   $user->gender = $_POST['gender'];
+  $user->address = $_POST['address'];
   $password = $_POST['password'];
   $password_re = $_POST['password_re'];
   if ($password === $password_re) {

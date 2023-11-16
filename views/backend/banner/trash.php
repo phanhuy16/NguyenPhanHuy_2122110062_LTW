@@ -23,11 +23,17 @@ $list = Banner::where('status', '=', 0)
    <section class="content">
       <div class="card">
          <div class="card-header">
-            <div class="col-md-12 text-right">
-               <a href="index.php?option=banner" class="btn btn-sm btn-info">
-                  <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                  Về danh sách
-               </a>
+            <div class="row">
+               <div class="col-md-6">
+                  <a href="index.php?option=banner" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
+                  <a href="index.php?option=banner&cat=trash" class="btn btn-sm btn-warning mb-2"> Thùng rác</a>
+               </div>
+               <div class="col-md-6 text-right">
+                  <a href="index.php?option=banner" class="btn btn-sm btn-info">
+                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                     Về danh sách
+                  </a>
+               </div>
             </div>
          </div>
          <div class="card-body">

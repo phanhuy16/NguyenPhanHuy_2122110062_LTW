@@ -15,14 +15,15 @@ $list = Post::where([['status', '!=', 0], ['type', '=', 'page']])
          <div class="row mb-2">
             <div class="col-sm-12 d-flex align-items-center">
                <h1 class="d-inline">Tất cả trang đơn</h1>
-               <!-- <a href="index.php?option=page&cat=page_create" class="btn btn-sm btn-primary mx-3">Thêm trang đơn</a> -->
+               <a href="index.php?option=page&cat=create" class="btn btn-sm btn-primary mx-3">Thêm trang đơn</a>
             </div>
          </div>
       </div>
    </section>
    <!-- Main content -->
    <section class="content">
-      <a href="index.php?option=page&cat=trash" class="mb-3 btn btn-sm btn-warning"> Thùng rác</a>
+      <a href="index.php?option=page" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
+      <a href="index.php?option=page&cat=trash" class="mb-2 btn btn-sm btn-warning"> Thùng rác</a>
       <div class="card">
          <div class="card-header p-2">
             Noi dung

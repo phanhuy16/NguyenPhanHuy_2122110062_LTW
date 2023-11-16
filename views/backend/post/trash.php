@@ -28,6 +28,7 @@ $list = Post::where('post.status', '=', 0)
          <div class="card-header">
             <div class="row">
                <div class="col-md-6">
+                  <a href="index.php?option=post" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
                   <a href="index.php?option=post&cat=trash" class="btn btn-sm btn-warning"> Thùng rác</a>
                </div>
                <div class="col-md-6 text-right">

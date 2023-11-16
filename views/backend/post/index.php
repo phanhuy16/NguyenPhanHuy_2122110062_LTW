@@ -17,14 +17,15 @@ $list = Post::where([['post.status', '!=', 0], ['type', '=', 'post']])
          <div class="row mb-2">
             <div class="col-sm-12 d-flex align-items-center">
                <h1 class="d-inline">Tất cả bài viết</h1>
-               <a href="index.php?option=post&cat=post_create" class="btn btn-sm btn-primary mx-3">Thêm bài viết</a>
+               <a href="index.php?option=post&cat=post-create" class="btn btn-sm btn-primary mx-3">Thêm bài viết</a>
             </div>
          </div>
       </div>
    </section>
    <!-- Main content -->
    <section class="content">
-      <a href="index.php?option=post&cat=trash" class="mb-3 btn btn-sm btn-warning"> Thùng rác</a>
+      <a href="index.php?option=post" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
+      <a href="index.php?option=post&cat=trash" class="mb-2 btn btn-sm btn-warning"> Thùng rác</a>
       <div class="card">
          <div class="card-header p-2">
             Noi dung

@@ -16,7 +16,7 @@ $mod_list_product = Product::where('status', '=', 1)
       <div class="product-item border">
         <div class="product-item-image">
           <a href="index.php?option=product&slug=<?= $pro->slug; ?>">
-            <img src="../public/images/product/<?= $pro->image; ?>" class="img-fluid" alt="">
+            <img src="public/images/product/<?= $pro->image; ?>" class="img-fluid" alt="">
           </a>
         </div>
         <h2 class="product-item-name text-main text-center fs-5 py-1">

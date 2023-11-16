@@ -2,7 +2,7 @@
 
 use App\Models\Category;
 
-$list = Category::where([['status', '!=', 0], ['parent_id', '==', '0']])
+$list = Category::where('status', '!=', 0)
    ->orderBy('created_at', 'DESC')
    ->get();
 

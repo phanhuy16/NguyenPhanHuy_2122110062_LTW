@@ -1,31 +1,20 @@
 <?php
 
-use App\Models\Post;
-use App\Models\Topic;
+use App\Models\User;
 
-$list = Post::where('status', '!=', 0)->orderBy('created_at', 'DESC')->get();
-$post_id_html = '';
-foreach ($list as $post) {
-   $post_id_html .= "<option value='$post->id'>$post->title</option>";
-}
-$list_topic = Topic::where('parent_id', '=', '0')->orderBy('created_at', 'DESC')
-   ->select('id', 'name')->get();
-$topic_id_html = '';
-foreach ($list_topic as $topic) {
-   $topic_id_html .= "<option value='$topic->id'>$topic->name</option>";
-}
+$list = User::where('status', '!=', 0)->orderBy('created_at', 'DESC')->get();
 
 ?>
 
 <?php require_once "../views/backend/header.php"; ?>
 <!-- CONTENT -->
-<form action="index.php?option=post&cat=process" method="post" enctype="multipart/form-data">
+<form action="index.php?option=customer&cat=process" method="post" enctype="multipart/form-data">
    <div class="content-wrapper">
       <section class="content-header">
          <div class="container-fluid">
             <div class="row mb-2">
                <div class="col-sm-12">
-                  <h1 class="d-inline">Thêm mới bài viết</h1>
+                  <h1 class="d-inline">Thêm mới khách hàng</h1>
                </div>
             </div>
          </div>
@@ -33,41 +22,49 @@ foreach ($list_topic as $topic) {
       <section class="content">
          <div class="card">
             <div class="card-header text-right">
-               <a href="index.php?option=post" class="btn btn-sm btn-info">
+               <a href="../backend/product_index.html" class="btn btn-sm btn-info">
                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                   Về danh sách
                </a>
                <button class="btn btn-sm btn-success" name="CHANGEADD">
                   <i class="fa fa-save" aria-hidden="true"></i>
-                  Thêm bài viết
+                  Thêm khách hàng
                </button>
             </div>
             <div class="card-body">
                <div class="row">
-                  <div class="col-md-9">
+                  <div class="col-md-6">
                      <div class="mb-3">
-                        <label>Tiêu đề bài viết (*)</label>
-                        <input type="text" name="title" class="form-control">
+                        <label>Họ tên (*)</label>
+                        <input type="text" name="name" class="form-control">
                      </div>
                      <div class="mb-3">
-                        <label>Slug</label>
-                        <input type="text" name="slug" class="form-control">
+                        <label>Điện thoại</label>
+                        <input type="text" name="phone" class="form-control">
                      </div>
                      <div class="mb-3">
-                        <label>Chi tiết (*)</label>
-                        <textarea name="detail" rows="3" class="form-control"></textarea>
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control">
                      </div>
                      <div class="mb-3">
-                        <label>Mô tả (*)</label>
-                        <textarea name="description" rows="1" class="form-control"></textarea>
+                        <label>Tên đăng nhập</label>
+                        <input type="text" name="username" class="form-control">
+                     </div>
+                     <div class="mb-3">
+                        <label>Mật khẩu</label>
+                        <input type="password" name="password" class="form-control">
+                     </div>
+                     <div class="mb-3">
+                        <label>Xác nhận mật khẩu</label>
+                        <input type="password" name="password_re" class="form-control">
                      </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                      <div class="mb-3">
-                        <label>Chủ đề (*)</label>
-                        <select name="topic_id" class="form-control">
-                           <option value="1">Tên danh mục</option>
-                           <?= $topic_id_html ?>
+                        <label>Giới tính</label>
+                        <select name="gender" class="form-control">
+                           <option value="1">Nam</option>
+                           <option value="0">Nữ</option>
                         </select>
                      </div>
                      <div class="mb-3">

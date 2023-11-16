@@ -59,10 +59,6 @@ foreach ($list_topic as $topic) {
                         <input type="text" value="<?= $post->slug; ?>" name="slug" class="form-control">
                      </div>
                      <div class="mb-3">
-                        <label>Mô tả</label>
-                        <textarea name="description" class="form-control"><?= $post->description; ?></textarea>
-                     </div>
-                     <div class="mb-3">
                         <label>Chi tiết (*)</label>
                         <textarea name="detail" rows="3" class="form-control"><?= $post->detail; ?></textarea>
                      </div>

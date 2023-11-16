@@ -12,7 +12,6 @@ if (isset($_POST['CHANGEADD'])) {
   $post->status = $_POST['status'];
   $post->detail = $_POST['detail'];
   $post->topic_id = $_POST['topic_id'];
-  $post->description = $_POST['description'];
 
   //Xử lý uploads file
   if (strlen($_FILES['image']['name']) > 0) {
@@ -54,7 +53,6 @@ if (isset($_POST['CAPNHAT'])) {
   $post->status = $_POST['status'];
   $post->detail = $_POST['detail'];
   $post->topic_id = $_POST['topic_id'];
-  $post->description = $_POST['description'];
 
   //Xử lý uploads file
   if (strlen($_FILES['image']['name']) > 0) {

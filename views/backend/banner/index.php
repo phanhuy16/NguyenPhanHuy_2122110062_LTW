@@ -24,7 +24,8 @@ $list = Banner::where('status', '!=', 0)
    </section>
    <!-- Main content -->
    <section class="content">
-      <a href="index.php?option=banner&cat=trash" class="btn btn-sm btn-warning mb-3"> Thùng rác</a>
+      <a href="index.php?option=banner" class="btn btn-sm btn-primary mb-2">Tất cả </a> |
+      <a href="index.php?option=banner&cat=trash" class="btn btn-sm btn-warning mb-2"> Thùng rác</a>
       <div class="card">
          <div class="card-header">
             Noi dung

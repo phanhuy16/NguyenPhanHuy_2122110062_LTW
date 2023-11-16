@@ -32,6 +32,7 @@ $list_page = Post::where([['status', '!=', 0], ['type', '!=', 'page']])->get();
          <div class="card">
             <div class="row">
                <div class="col-md-6 card-header">
+                  <a href="index.php?option=menu" class="btn btn-sm btn-primary">Tất cả </a> |
                   <a href="index.php?option=menu&cat=trash" class="btn btn-sm btn-warning"> Thùng rác</a>
                </div>
                <div class="col-md-6">
